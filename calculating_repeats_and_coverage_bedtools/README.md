@@ -7,9 +7,9 @@
 
 As an example I will demonstrate how this was done for L. squamata here:
 
-##Use bedtools merge to merge overlapping repeat regions in the bedfile of your annotated repeats. Otherwise they will be counted multiple times.
+## Use bedtools merge to merge overlapping repeat regions in the bedfile of your annotated repeats. Otherwise they will be counted multiple times.
 
-bedtools merge -i Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out.bed > Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out_merge.bed
+> bedtools merge -i Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out.bed > Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out_merge.bed
 
 ## Use bedtools intersect to find regions of overlap between the repeats from the annotated .out.bed file with the -wo option so the number of base pair overlap is computed:
 
@@ -17,7 +17,7 @@ bedtools merge -i Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out.bed > Lepido
 
 ## Calculate the repeat content using awk:
 
-awk 'BEGIN {OFS = "\t"} {
+> awk 'BEGIN {OFS = "\t"} {
     region_size = $3 - $2;
     repeat_size += $NF;
     region_id = $1 ":" $2 "-" $3;
