@@ -16,27 +16,29 @@ As an example I will demonstrate how this was done for L. squamata here:
 > bedtools intersect -a Lepidodermella_sp_100kb_window.bed -b Lepidodermella_sp.asm.bp.p_ctg_filtered.fasta.out_merge.bed -wo > intersection_repeats.bed
 
 ## Calculate the repeat content using awk:
+This awk script is probably not the most efficient but it works well to do what needs to be done. Essentially it is calculating repeat percentage by adding up the repeats for a given region and then calculating a percentage. Once it moves to a new region it resets and does it again.
 
 > awk 'BEGIN {OFS = "\t"} {
-    region_size = $3 - $2;
-    repeat_size += $NF;
-    region_id = $1 ":" $2 "-" $3;
-    if (prev_region != "" && prev_region != region_id) {
-        repeat_percentage = (prev_repeat_size / prev_region_size) * 100;
-        print prev_region, repeat_percentage;
-        repeat_size = 0;  # Reset repeat_size for the new region
-    }
-    prev_region = region_id;
-    prev_region_size = region_size;  # Store the size of the current region as the previous region size
-    prev_repeat_size = repeat_size	
-} END {
-    if (prev_region != "") {
-        repeat_percentage = (prev_repeat_size / prev_region_size) * 100;
-        print prev_region, repeat_percentage;
-    }
-}' intersection_repeats.bed > repeat_content.bed
+>    region_size = $3 - $2;
+>    repeat_size += $NF;
+>    region_id = $1 ":" $2 "-" $3;
+>    if (prev_region != "" && prev_region != region_id) {
+>        repeat_percentage = (prev_repeat_size / prev_region_size) * 100;
+>        print prev_region, repeat_percentage;
+>        repeat_size = 0;  # Reset repeat_size for the new region
+>    }
+>    prev_region = region_id;
+>    prev_region_size = region_size;  # Store the size of the current region as the previous region size
+>    prev_repeat_size = repeat_size	
+> } END {
+>    if (prev_region != "") {
+>        repeat_percentage = (prev_repeat_size / prev_region_size) * 100;
+>        print prev_region, repeat_percentage;
+>    }
+> }' intersection_repeats.bed > repeat_content.bed
 
 ## Check that this is formatted correctly as a bed file. Its not so use sed to fix it.
+I use this sed command to fix some formatting.
 
 > sed -i.bak 's/\:/\t/g; s/\-/\t/g' repeat_content.bed
 
