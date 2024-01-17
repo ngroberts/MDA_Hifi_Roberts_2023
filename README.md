@@ -4,6 +4,8 @@
 ### Torsten H. Struck, t.h.struck@nhm.uio.no
 ### *Kevin M. Kocot, kmkocot@ua.edu
 
+* Corresponding author.
+
 ### Abstract: 
 #### Background: 
 Obtaining adequate DNA for long-read genome sequencing remains a roadblock to producing contiguous genomes from small-bodied organisms. Multiple displacement amplification (MDA) leverages Phi29 DNA polymerase to produce micrograms of DNA from picograms of input. Few genomes have been generated using this approach, due to concerns over biases in amplification related to GC and repeat content and chimera production. Here, we explored the utility of MDA for generating template DNA for PacBio HiFi sequencing using *Caenorhabditis elegans* (Nematoda) and *Lepidodermella squamata* (Gastrotricha). 
