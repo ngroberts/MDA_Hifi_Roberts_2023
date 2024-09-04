@@ -33,7 +33,8 @@ A semi-tutorial about how to create 100kb blocks, attach GC content, coverage, a
 
 Files needed for the above analysis on repeat content and GC content. 
 
->circos_plots
+>circos_plot_*
+>dna_diff
 
 Code for the circos plots, feel free to use this as a template but my file paths are retained.
 
