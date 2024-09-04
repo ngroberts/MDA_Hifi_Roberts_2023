@@ -1,0 +1,38 @@
+# Commands for Circos Plots
+
+##### Karyotype prep:
+
+Convert fasta to karyotype file using awk.
+
+```bash
+cat GCA_000002985.3_WBcel235_genomic_masked.fasta | awk '$0 ~ ">" {print c; c=0;printf "chr - " substr($0,2,100) " " "0" " "; } $0 !~ ">" {c+=length($0);} END { print c; }' >> CE_ref_kar.txt
+```
+
+Add the number after each chromosome name.
+
+```bash
+awk '{print $1, $2, $3, NR-1, $4, $5}' CE_ref_kar.txt > CE_ref_karo.txt 
+sed -i '1d' CE_ref_karo.txt 
+rm CE_ref_kar.txt 
+```
+Apply color to them which can be changed later.
+
+```bash
+awk '{print $0 " vred"}' CE_ref_karo.txt > CE_ref_karotype.txt
+```
+
+I also want to grab contigs of a certain length as adding all the short contigs is non-ideal.
+
+```bash
+awk '$6 > 80000 {print $3}' CE_MDA_karo.txt | paste -s -d ";"
+```
+
+This can then be place in the chromosomes line of the circos.conf to only include these.
+
+For grabbing links I retrived the 1coords file from mummer. Now this is not just the best aligning postion of a goven contig, this is displaying alignments across a single contigs so it wont be neat.
+
+```bash
+awk '{ print $13, $3, $4, $12, $1, $2}' out.1coords > links_alignments.txt
+```
+
+

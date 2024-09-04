@@ -1,0 +1,6 @@
+chr - BX284601.5 1 0 15072434 black
+chr - BX284602.5 2 0 15279421 black
+chr - BX284603.4 3 0 13783801 black
+chr - BX284604.4 4 0 17493829 black
+chr - BX284605.5 5 0 20924180 black
+chr - BX284606.5 6 0 17718942 black
